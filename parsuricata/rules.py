@@ -1,11 +1,13 @@
 from dataclasses import dataclass
-from typing import Union, Any, List
+from typing import Any, List, Union
 
 __all__ = [
     'RulesList',
     'Rule',
     'Option',
     'Variable',
+    'Setting',
+    'NegatedSetting',
     'Negated',
     'PortRange',
     'Grouping',
@@ -46,7 +48,7 @@ class Rule:
 @dataclass
 class Option:
     keyword: str
-    settings: Any = None
+    settings: 'Setting' = None
 
     def __str__(self):
         if self.settings is None:
@@ -61,6 +63,21 @@ class Variable:
 
     def __str__(self):
         return f'${self.identifier}'
+
+
+class Setting(str):
+    @property
+    def is_negated(self):
+        return False
+
+
+class NegatedSetting(Setting):
+    @property
+    def is_negated(self):
+        return True
+
+    def __repr__(self):
+        return f'!{super().__repr__()}'
 
 
 @dataclass(frozen=True)

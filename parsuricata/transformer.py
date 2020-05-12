@@ -1,9 +1,19 @@
-from ipaddress import ip_interface, ip_address
-from typing import Union, Any
+from ipaddress import ip_address, ip_interface
+from typing import Any, Union
 
-from lark import Token, InlineTransformer, Tree
+from lark import InlineTransformer, Token, Tree
 
-from .rules import RulesList, Rule, Option, Variable, Negated, PortRange, Grouping
+from .rules import (
+    Grouping,
+    Negated,
+    NegatedSetting,
+    Option,
+    PortRange,
+    Rule,
+    RulesList,
+    Setting,
+    Variable,
+)
 
 
 class RuleTransformer(InlineTransformer):
@@ -52,11 +62,17 @@ class RuleTransformer(InlineTransformer):
 
     def option(self, keyword: Token, settings: Union[Token, Tree] = None) -> Option:
         if settings is not None:
-            value = str(settings)
+            value = settings
         else:
             value = None
 
         return Option(str(keyword), value)
+
+    def settings(self, value: Any):
+        return Setting(value)
+
+    def negated_settings(self, value: Any):
+        return NegatedSetting(value)
 
     def variable(self, variable: Token):
         identifier = str(variable)[1:]
