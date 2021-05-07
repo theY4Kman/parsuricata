@@ -87,7 +87,7 @@ parser = Lark(
         !direction: "->"
                   | "<>"
 
-        body: (option _ESCAPED_NEWLINE*)+
+        body: _ESCAPED_NEWLINE* (option _ESCAPED_NEWLINE*)+
 
         option: KEYWORD ";"
               | KEYWORD ":" settings ";"
