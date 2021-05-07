@@ -94,8 +94,9 @@ parser = Lark(
 
         KEYWORD: /[a-z_]+/i
 
-        ?settings: string
-                 | LITERAL
+        settings: string
+                | "!" string   -> negated_settings
+                | LITERAL
 
         !string: /"([^;\\"]|(?!\\)\\[;\\"])*"/
 
