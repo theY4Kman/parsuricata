@@ -1,4 +1,4 @@
-__version__ = "0.1.1"
+__version__ = "0.2.2"
 
 from ._parser import parser
 from .rules import *
