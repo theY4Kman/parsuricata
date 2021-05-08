@@ -112,3 +112,19 @@ def test_escaped(setting, expected):
     ]
     actual = rules
     assert expected == actual
+
+
+def test_spaces_at_ends_of_string():
+    rules = parse_rules(f'''
+        alert ip any any -> any any ( \\
+            msg: " This is a test of spaces. "; \\
+        )
+    ''')
+
+    expected = [
+        Rule('alert', 'ip', 'any', 'any', '->', 'any', 'any', [
+            Option('msg', Setting(' This is a test of spaces. '))
+        ])
+    ]
+    actual = rules
+    assert expected == actual
