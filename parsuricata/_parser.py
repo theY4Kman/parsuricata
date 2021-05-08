@@ -1,14 +1,15 @@
 from lark import Lark
 
+from .transformer import RuleTransformer
 
 grammar = r'''
+    %import common.ESCAPED_STRING   -> STRING
     %ignore " "
 
     _NEWLINE: /[\r\n]+/
     _ESCAPED_NEWLINE: /(\\(\r\n|\r|\n))+/
 
-    rules: _NEWLINE* rule _NEWLINE*
-         | _NEWLINE* rule (_NEWLINE+ rule)+ _NEWLINE*
+    rules: (_NEWLINE* rule)* _NEWLINE*
 
     rule: action protocol target port direction target port "(" body ")"
 
@@ -96,7 +97,7 @@ grammar = r'''
             | "!" string   -> negated_settings
             | LITERAL
 
-    !string: /"([^;\\"]|(?!\\)\\[;\\"])*"/
+    string: STRING
 
     LITERAL: /(?!\s+)([^;\\"]|(?!\\)\\[;\\"])+(?!\s+)/
 '''
@@ -105,4 +106,5 @@ parser = Lark(
     start='rules',
     parser='lalr',
     grammar=grammar,
+    transformer=RuleTransformer(),
 )

@@ -6,5 +6,4 @@ from .transformer import RuleTransformer
 
 
 def parse_rules(source: str) -> RulesList:
-    tree = parser.parse(source)
-    return RuleTransformer().transform(tree)
+    return parser.parse(source)
