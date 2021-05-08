@@ -1,4 +1,6 @@
-from parsuricata import parse_rules
+import pytest
+
+from parsuricata import Option, parse_rules, Rule, Setting
 
 
 def test_content():
@@ -81,4 +83,32 @@ def test_multiple_rules():
         for rule in rules
         for option in rule.options
     ]
+    assert expected == actual
+
+
+@pytest.mark.parametrize('setting,expected', {
+    r'"Message with semicolon\;"':
+        r'Message with semicolon\;',
+    r'"Message with backslashes\\\\\\!"':
+        r'Message with backslashes\\\\\\!',
+    r'"Message with \"quotes\""':
+        r'Message with \"quotes\"',
+    r'"Message with \"quotes\" and final backslash\\"':
+        r'Message with \"quotes\" and final backslash\\',
+    r'"Message with\: colon"':
+        r'Message with\: colon',
+}.items())
+def test_escaped(setting, expected):
+    rules = parse_rules(f'''
+        alert ip any any -> any any ( \\
+            msg:{setting}; \\
+        )
+    ''')
+
+    expected = [
+        Rule('alert', 'ip', 'any', 'any', '->', 'any', 'any', [
+            Option('msg', Setting(expected))
+        ])
+    ]
+    actual = rules
     assert expected == actual

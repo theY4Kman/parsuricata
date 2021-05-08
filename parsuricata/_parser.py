@@ -2,6 +2,7 @@ from lark import Lark
 
 
 grammar = r'''
+    %import common.ESCAPED_STRING   -> STRING
     %ignore " "
 
     _NEWLINE: /[\r\n]+/
@@ -96,7 +97,7 @@ grammar = r'''
             | "!" string   -> negated_settings
             | LITERAL
 
-    !string: /"([^;\\"]|(?!\\)\\[;\\"])*"/
+    string: STRING
 
     LITERAL: /(?!\s+)([^;\\"]|(?!\\)\\[;\\"])+(?!\s+)/
 '''
