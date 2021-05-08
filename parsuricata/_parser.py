@@ -8,8 +8,7 @@ grammar = r'''
     _NEWLINE: /[\r\n]+/
     _ESCAPED_NEWLINE: /(\\(\r\n|\r|\n))+/
 
-    rules: _NEWLINE* rule _NEWLINE*
-         | _NEWLINE* rule (_NEWLINE+ rule)+ _NEWLINE*
+    rules: (_NEWLINE* rule)* _NEWLINE*
 
     rule: action protocol target port direction target port "(" body ")"
 
