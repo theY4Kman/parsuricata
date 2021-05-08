@@ -1,5 +1,6 @@
 from lark import Lark
 
+from .transformer import RuleTransformer
 
 grammar = r'''
     %import common.ESCAPED_STRING   -> STRING
@@ -105,4 +106,5 @@ parser = Lark(
     start='rules',
     parser='lalr',
     grammar=grammar,
+    transformer=RuleTransformer(),
 )
