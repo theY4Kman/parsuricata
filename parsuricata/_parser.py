@@ -71,11 +71,9 @@ grammar = r'''
 
     ?port_spec: variable
               | integer
-              | "[" port_grouping_spec ("," port_grouping_spec)* "]"    -> port_grouping
+              | port_range
+              | "[" port_spec ("," port_spec)* "]"                      -> port_grouping
               | "!" port_spec                                           -> negated
-
-    ?port_grouping_spec: port_spec
-                       | port_range
 
     !port_range: integer ":" integer
                | ":" integer
