@@ -128,3 +128,32 @@ def test_spaces_at_ends_of_string():
     ]
     actual = rules
     assert expected == actual
+
+
+EXAMPLE_RULES_CORPUS = '''
+alert ip [127.0.0.1, 127.0.0.2] any -> ![8.8.8.8/24, 1.1.1.1] any ( msg:"Test rule"; sid:12345678; rev:1; )
+alert ip any 80:100 -> any any ( msg:"Fart"; )
+alert ip any 80: -> any any ( msg:"Fart"; )
+alert ip any :100 -> any any ( msg:"Fart"; )
+alert ip any any -> any any ( msg:"Test rule"; tls.cert_subject; content:"CN=*.googleusercontent.com"; sid:12345678; rev:1; )
+'''
+
+EXAMPLE_RULES = EXAMPLE_RULES_CORPUS.strip().splitlines()
+
+
+@pytest.mark.parametrize('source_rule', [
+    pytest.param(rule, id=rule)
+    for rule in EXAMPLE_RULES
+])
+def test_parse_to_string_to_parse(source_rule):
+    orig_parsed_rules = parse_rules(source_rule)
+    orig_parsed_rule = orig_parsed_rules[0]
+
+    stringified_rule = str(orig_parsed_rule)
+
+    twice_parsed_rules = parse_rules(stringified_rule)
+    twice_parsed_rule = twice_parsed_rules[0]
+
+    expected = orig_parsed_rule
+    actual = twice_parsed_rule
+    assert expected == actual
