@@ -49,7 +49,7 @@ grammar = r'''
     ?target_spec: variable
                 | ip
                 | cidr
-                | "[" target_spec ("," target_spec)* "]"
+                | "[" target_spec ("," target_spec)* "]"    -> target_grouping
                 | "!" target_spec                           -> negated
 
     variable: /\$[a-z_]+/i

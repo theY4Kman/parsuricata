@@ -48,6 +48,9 @@ class RuleTransformer(InlineTransformer):
     any = str
     direction = str
 
+    def target_grouping(self, *components):
+        return Grouping(components)
+
     def port_grouping(self, *components):
         return Grouping(components)
 
