@@ -92,7 +92,7 @@ grammar = r'''
     option: KEYWORD ";"
           | KEYWORD ":" settings ";"
 
-    KEYWORD: /[a-z_]+/i
+    KEYWORD: /[a-z_.]+/i
 
     settings: string
             | "!" string   -> negated_settings
