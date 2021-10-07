@@ -74,7 +74,7 @@ grammar = r'''
     option: KEYWORD ";"
           | KEYWORD ":" settings ";"
 
-    KEYWORD: /[a-z_.]+/i
+    KEYWORD: /[a-z0-9_.\-]+/i
 
     settings: string
             | "!" string   -> negated_settings

@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
  - Allow comments in rules files (e.g. `# Comment`)
  - Allow any string for protocol (previously, a static list of protocols was used, but this list changes all the time)
+ - Allow numbers in option keywords (e.g. `asn1: double_overflow;`)
+ - Allow dashes in option keywords (e.g. `app-layer-event:applayer_mismatch_protocol_both_directions;`)
+ - Allow comma-delimited literals in option settings (e.g. `flowint:applayer.anomaly.count,+,1;`)
 
 ### Changed
  - Upgraded lark-parser to 0.12.0
@@ -38,7 +41,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.2.1] — 2021-05-07
 ### Added
- - Added support for negated settings (e.g. `content:!"stuff";`). [GH#5](https://github.com/theY4Kman/parsuricata/issues/5), [GH#1](https://github.com/theY4Kman/parsuricata/issues/1)
+ - Added support for negated settings (e.g. `content: !"stuff";`). [GH#5](https://github.com/theY4Kman/parsuricata/issues/5), [GH#1](https://github.com/theY4Kman/parsuricata/issues/1)
 
 
 ## [0.1.1] — 2019-05-14
