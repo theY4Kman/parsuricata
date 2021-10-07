@@ -155,15 +155,24 @@ def test_spaces_at_ends_of_string():
     assert expected == actual
 
 
-EXAMPLE_RULES_CORPUS = '''
+EXAMPLE_RULES_CORPUS = r'''
 alert ip [127.0.0.1, 127.0.0.2] any -> ![8.8.8.8/24, 1.1.1.1] any ( msg:"Test rule"; sid:12345678; rev:1; )
 alert ip any 80:100 -> any any ( msg:"Fart"; )
 alert ip any 80: -> any any ( msg:"Fart"; )
 alert ip any :100 -> any any ( msg:"Fart"; )
 alert ip any any -> any any ( msg:"Test rule"; tls.cert_subject; content:"CN=*.googleusercontent.com"; sid:12345678; rev:1; )
+
+# These rules come from Emerging Threats
+alert ip any any -> any any (msg:"SURICATA Applayer Mismatch protocol both directions"; flow:established; app-layer-event:applayer_mismatch_protocol_both_directions; flowint:applayer.anomaly.count,+,1; classtype:protocol-command-decode; sid:2260000; rev:1;)
+alert tcp $EXTERNAL_NET any -> $HOME_NET 445 (msg:"GPL NETBIOS SMB-DS Session Setup NTMLSSP asn1 overflow attempt"; flow:established,to_server; content:"|00|"; depth:1; content:"|FF|SMBs"; within:5; distance:3; byte_test:1,!&,128,6,relative; byte_test:4,&,2147483648,48,relative,little; content:!"NTLMSSP"; within:7; distance:54; asn1:double_overflow, bitstring_overflow, relative_offset 54, oversize_length 2048; reference:bugtraq,9633; reference:bugtraq,9635; reference:cve,2003-0818; reference:nessus,12052; reference:nessus,12065; reference:url,www.microsoft.com/technet/security/bulletin/MS04-007.mspx; classtype:protocol-command-decode; sid:2102383; rev:21; metadata:created_at 2010_09_23, updated_at 2010_09_23;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"ET PHISHING Common Unhidebody Function Observed in Phishing Landing"; flow:established,to_client; file.data; content:"function unhideBody()"; nocase; fast_pattern; content:"var bodyElems = document.getElementsByTagName(|22|body|22|)|3b|"; nocase; content:"bodyElems[0].style.visibility =|20 22|visible|22 3b|"; nocase; distance:0; content:"onload=|22|unhideBody()|22|"; content:"method="; nocase; pcre:"/^["']?post/Ri"; classtype:social-engineering; sid:2029732; rev:2; metadata:affected_product Web_Browsers, attack_target Client_Endpoint, created_at 2020_03_24, deployment Perimeter, signature_severity Minor, tag Phishing, updated_at 2020_03_24;)
 '''
 
-EXAMPLE_RULES = EXAMPLE_RULES_CORPUS.strip().splitlines()
+EXAMPLE_RULES = [
+    rule
+    for rule in EXAMPLE_RULES_CORPUS.strip().splitlines()
+    if rule and rule[0] != '#'
+]
 
 
 @pytest.mark.parametrize('source_rule', [
