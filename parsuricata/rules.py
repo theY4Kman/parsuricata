@@ -82,23 +82,28 @@ class Literal(str):
 
 
 class Setting(str):
+    orig_value: Union[String, Literal, str]
+
     def __new__(cls, value):
-        repr_cls = type(cls.__name__, (cls,), {'__repr__': lambda self: f'{value!r}'})
-        return str.__new__(repr_cls, value)
+        o = str.__new__(cls, value)
+        o.orig_value = value
+        return o
 
     @property
     def is_negated(self):
         return False
 
+    def __repr__(self):
+        return repr(self.orig_value)
+
 
 class NegatedSetting(Setting):
-    def __new__(cls, value):
-        repr_cls = type(cls.__name__, (cls,), {'__repr__': lambda self: f'!{value!r}'})
-        return str.__new__(repr_cls, value)
-
     @property
     def is_negated(self):
         return True
+
+    def __repr__(self):
+        return f'!{super().__repr__()}'
 
 
 @dataclass(frozen=True)
