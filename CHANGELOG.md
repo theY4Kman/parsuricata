@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  - Allow dashes in option keywords (e.g. `app-layer-event:applayer_mismatch_protocol_both_directions;`)
  - Allow comma-delimited literals in option settings (e.g. `flowint:applayer.anomaly.count,+,1;`)
  - Allow unescaped double quotes inside quoted strings, like Suricata allows (e.g. `pcre:"/^["']?post/Ri";`)
+ - Faithfully reproduce quoted strings and unquoted literals in option settings
 
 ### Changed
  - Upgraded lark-parser to 0.12.0

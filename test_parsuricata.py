@@ -16,7 +16,23 @@ def test_content():
     option = rule.options[0]
     assert option.settings == 'heymum'
     assert not option.settings.is_negated
-    assert repr(option.settings) == "'heymum'"
+    assert repr(option.settings) == '"heymum"'
+
+
+def test_literal_content():
+    rules = parse_rules('''
+        alert ip any any -> any any (content: heymum;)
+    ''')
+
+    assert len(rules) == 1
+
+    rule = rules[0]
+    assert len(rule.options) == 1
+
+    option = rule.options[0]
+    assert option.settings == 'heymum'
+    assert not option.settings.is_negated
+    assert repr(option.settings) == 'heymum'
 
 
 def test_negated_content():
@@ -32,7 +48,7 @@ def test_negated_content():
     option = rule.options[0]
     assert option.settings == 'heymum'
     assert option.settings.is_negated
-    assert repr(option.settings) == "!'heymum'"
+    assert repr(option.settings) == '!"heymum"'
 
 
 def test_multiline_rule():
@@ -50,7 +66,7 @@ def test_multiline_rule():
     option = rule.options[0]
     assert option.settings == 'heymum'
     assert not option.settings.is_negated
-    assert repr(option.settings) == "'heymum'"
+    assert repr(option.settings) == '"heymum"'
 
 
 def test_multiple_rules():

@@ -83,13 +83,11 @@ grammar = r'''
     settings: "!" settings_expr   -> negated_settings
             | settings_expr
 
-    ?settings_expr: settings_atom ("," settings_atom)*
+    ?settings_expr: STRING  -> string
+                  | LITERAL -> literal
 
-    ?settings_atom: string | LITERAL
-
-    string: /"[^\r\n]+?"(?=\s*[;,])/
-
-    LITERAL: /(?!\s+)([^;\\"]|(?!\\)\\[;\\"])+(?!\s+)/
+    STRING: /"[^\r\n]+?"(?=\s*[;])/
+    LITERAL: /(?!\s+)([^;\\"]|(?!\\)\\[;\\"])+(?=;)/
 '''
 
 parser = Lark(

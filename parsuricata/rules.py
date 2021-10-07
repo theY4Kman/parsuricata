@@ -6,6 +6,8 @@ __all__ = [
     'Rule',
     'Option',
     'Variable',
+    'String',
+    'Literal',
     'Setting',
     'NegatedSetting',
     'Negated',
@@ -54,7 +56,7 @@ class Option:
         if self.settings is None:
             return f'{self.keyword};'
         else:
-            return f'{self.keyword}: {self.settings};'
+            return f'{self.keyword}: {self.settings!r};'
 
 
 @dataclass(frozen=True)
@@ -65,19 +67,38 @@ class Variable:
         return f'${self.identifier}'
 
 
+class String(str):
+    """A quoted string"""
+
+    def __repr__(self):
+        return f'"{self}"'
+
+
+class Literal(str):
+    """An unquoted string"""
+
+    def __repr__(self):
+        return str(self)
+
+
 class Setting(str):
+    def __new__(cls, value):
+        repr_cls = type(cls.__name__, (cls,), {'__repr__': lambda self: f'{value!r}'})
+        return str.__new__(repr_cls, value)
+
     @property
     def is_negated(self):
         return False
 
 
 class NegatedSetting(Setting):
+    def __new__(cls, value):
+        repr_cls = type(cls.__name__, (cls,), {'__repr__': lambda self: f'!{value!r}'})
+        return str.__new__(repr_cls, value)
+
     @property
     def is_negated(self):
         return True
-
-    def __repr__(self):
-        return f'!{super().__repr__()}'
 
 
 @dataclass(frozen=True)

@@ -5,6 +5,7 @@ from lark import InlineTransformer, Token, Tree
 
 from .rules import (
     Grouping,
+    Literal,
     Negated,
     NegatedSetting,
     Option,
@@ -12,6 +13,7 @@ from .rules import (
     Rule,
     RulesList,
     Setting,
+    String,
     Variable,
 )
 
@@ -88,7 +90,10 @@ class RuleTransformer(InlineTransformer):
         return ip_interface(str(tok))
 
     def string(self, tok: Token):
-        return tok.value[1:-1]
+        return String(tok.value[1:-1])
+
+    def literal(self, tok: Token):
+        return Literal(tok.value)
 
     def integer(self, tok):
         return int(tok.value)
