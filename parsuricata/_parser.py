@@ -81,9 +81,12 @@ grammar = r'''
 
     KEYWORD: /[a-z0-9_.\-]+/i
 
-    settings: string
-            | "!" string   -> negated_settings
-            | LITERAL
+    settings: "!" settings_expr   -> negated_settings
+            | settings_expr
+
+    ?settings_expr: settings_atom ("," settings_atom)*
+
+    ?settings_atom: string | LITERAL
 
     string: STRING
 
