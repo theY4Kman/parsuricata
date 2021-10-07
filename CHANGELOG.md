@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
  - _DOC:_ added CHANGELOG
 
+### Fixed
+ - Allow comments in rules files (e.g. `# Comment`)
+
 ### Changed
  - Upgraded lark-parser to 0.12.0
  - _DEV:_ upgraded pytest to 6.2.5 — note: minimum Python version is now 3.6

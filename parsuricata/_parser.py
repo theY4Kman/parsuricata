@@ -5,6 +5,8 @@ from .transformer import RuleTransformer
 grammar = r'''
     %import common.ESCAPED_STRING   -> STRING
     %ignore " "
+    COMMENT: "#" /[^\r\n]/*
+    %ignore COMMENT
 
     _NEWLINE: /[\r\n]+/
     _ESCAPED_NEWLINE: /(\\(\r\n|\r|\n))+/

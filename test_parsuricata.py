@@ -86,6 +86,15 @@ def test_multiple_rules():
     assert expected == actual
 
 
+def test_comments():
+    rules = parse_rules('''
+        # This is a comment
+        alert ip any any -> any any (content: "heymum";)
+    ''')
+
+    assert len(rules) == 1
+
+
 @pytest.mark.parametrize('setting,expected', {
     r'"Message with semicolon\;"':
         r'Message with semicolon\;',
