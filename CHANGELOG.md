@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
+
+
+## [0.3.0] — 2021-10-07
 ### Added
  - _DOC:_ added CHANGELOG
 
@@ -19,8 +22,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  - Faithfully reproduce quoted strings and unquoted literals in option settings
 
 ### Changed
+ - Changed minimum Python version to 3.6
  - Upgraded lark-parser to 0.12.0
- - _DEV:_ upgraded pytest to 6.2.5 — note: minimum Python version is now 3.6
+ - _DEV:_ upgraded pytest to 6.2.5
 
 
 ## [0.2.4] — 2021-09-28
