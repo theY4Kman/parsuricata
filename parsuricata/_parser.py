@@ -3,7 +3,6 @@ from lark import Lark
 from .transformer import RuleTransformer
 
 grammar = r'''
-    %import common.ESCAPED_STRING   -> STRING
     %ignore " "
     COMMENT: "#" /[^\r\n]/*
     %ignore COMMENT
@@ -88,7 +87,7 @@ grammar = r'''
 
     ?settings_atom: string | LITERAL
 
-    string: STRING
+    string: /"[^\r\n]+?"(?=\s*[;,])/
 
     LITERAL: /(?!\s+)([^;\\"]|(?!\\)\\[;\\"])+(?!\s+)/
 '''
