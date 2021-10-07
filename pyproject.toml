@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'parsuricata'
-version = "0.3.0"
+version = "0.3.1"
 description = 'Parse Suricata rules'
 authors = ['Zach "theY4Kman" Kanzler <they4kman@gmail.com>']
 license = 'MIT'
