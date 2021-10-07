@@ -11,6 +11,7 @@ grammar = r'''
     _NEWLINE: /[\r\n]+/
     _ESCAPED_NEWLINE: /(\\(\r\n|\r|\n))+/
 
+    start: rules
     rules: (_NEWLINE* rule)* _NEWLINE*
 
     rule: action protocol target port direction target port "(" body ")"
