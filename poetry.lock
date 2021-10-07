@@ -55,11 +55,16 @@ python-versions = "*"
 
 [[package]]
 name = "lark-parser"
-version = "0.7.8"
+version = "0.12.0"
 description = "a modern parsing library"
 category = "main"
 optional = false
 python-versions = "*"
+
+[package.extras]
+atomic_cache = ["atomicwrites"]
+nearley = ["js2py"]
+regex = ["regex"]
 
 [[package]]
 name = "packaging"
@@ -156,7 +161,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = '^3.6'
-content-hash = "f10b7ef49128c0b2c0e0989d3f0703c688277766e2af8cac1cb42cc2de9e8bd9"
+content-hash = "847455fe595f69314db0ea002dcdc52c2798ea91397f9e239dec786d1a5ec19c"
 
 [metadata.files]
 atomicwrites = [
@@ -180,7 +185,8 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 lark-parser = [
-    {file = "lark-parser-0.7.8.tar.gz", hash = "sha256:26215ebb157e6fb2ee74319aa4445b9f3b7e456e26be215ce19fdaaa901c20a4"},
+    {file = "lark-parser-0.12.0.tar.gz", hash = "sha256:15967db1f1214013dca65b1180745047b9be457d73da224fcda3d9dd4e96a138"},
+    {file = "lark_parser-0.12.0-py2.py3-none-any.whl", hash = "sha256:0eaf30cb5ba787fe404d73a7d6e61df97b21d5a63ac26c5008c78a494373c675"},
 ]
 packaging = [
     {file = "packaging-21.0-py3-none-any.whl", hash = "sha256:c86254f9220d55e31cc94d69bade760f0847da8000def4dfe1c6b872fd14ff14"},
