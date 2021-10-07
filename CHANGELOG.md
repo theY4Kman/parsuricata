@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
  - _DOC:_ added CHANGELOG
 
+### Changed
+ - _DEV:_ upgraded pytest to 6.2.5 — note: minimum Python version is now 3.6
+
 
 ## [0.2.4] — 2021-09-28
 ### Fixed
