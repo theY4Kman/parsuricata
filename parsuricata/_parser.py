@@ -71,8 +71,13 @@ grammar = r'''
 
     body: _ESCAPED_NEWLINE* (option _ESCAPED_NEWLINE*)+
 
-    option: KEYWORD ";"
-          | KEYWORD ":" settings ";"
+    option: KEYWORD _SEMICOLON
+          | KEYWORD _COLON settings _SEMICOLON
+
+    // Higher priorities, as these terminals are used to demarcate the option name
+    // and settings, in a context-free manner.
+    _COLON . 2: ":"
+    _SEMICOLON . 3: ";"
 
     KEYWORD: /[a-z0-9_.\-]+/i
 
