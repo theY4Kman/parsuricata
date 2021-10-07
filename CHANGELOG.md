@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
  - Allow comments in rules files (e.g. `# Comment`)
+ - Allow any string for protocol (previously, a static list of protocols was used, but this list changes all the time)
 
 ### Changed
  - Upgraded lark-parser to 0.12.0

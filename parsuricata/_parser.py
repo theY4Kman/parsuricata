@@ -20,28 +20,7 @@ grammar = r'''
            | "reject"
            | "alert"
 
-    !protocol: "ip"
-             | "tcp"
-             | "udp"
-             | "icmp"
-             | "http"
-             | "ftp"
-             | "tls"
-             | "smb"
-             | "dns"
-             | "dcerpc"
-             | "ssh"
-             | "smtp"
-             | "imap"
-             | "msn"
-             | "modbus"
-             | "dnp3"
-             | "enip"
-             | "nfs"
-             | "ikev2"
-             | "krb5"
-             | "ntp"
-             | "dhcp"
+    !protocol: /[^\s]+/
 
     ?target: any
            | target_spec
