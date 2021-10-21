@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
+
+
+## [0.3.2] — 2021-10-21
 ### Fixed
  - Added missing MIT `LICENSE` file. [GH#12](https://github.com/theY4Kman/parsuricata/issues/12)
 
