@@ -12,7 +12,12 @@ packages = [
 ]
 
 readme = 'README.md'
+homepage = 'https://github.com/theY4Kman/parsuricata'
+repository = 'https://github.com/theY4Kman/parsuricata'
 keywords = ['suricata', 'security']
+
+[tool.poetry.urls]
+Issues = 'https://github.com/theY4Kman/parsuricata/issues'
 
 [tool.poetry.dependencies]
 python = '^3.6'
