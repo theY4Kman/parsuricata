@@ -4,6 +4,12 @@ version = "0.3.1"
 description = 'Parse Suricata rules'
 authors = ['Zach "theY4Kman" Kanzler <they4kman@gmail.com>']
 license = 'MIT'
+packages = [
+  { include = "parsuricata" },
+  { include = "test_parsuricata.py", format = "sdist" },
+  { include = "LICENSE", format = "sdist" },
+  { include = "CHANGELOG.md", format = "sdist" },
+]
 
 readme = 'README.md'
 keywords = ['suricata', 'security']
