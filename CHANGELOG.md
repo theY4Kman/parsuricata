@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
+### Fixed
+ - Resolve parsing failures with reduced IPv6 addresses. [GH#14](https://github.com/theY4Kman/parsuricata/issues/14)
 
 
 ## [0.3.2] — 2021-10-21
