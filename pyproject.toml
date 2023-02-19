@@ -26,6 +26,9 @@ lark-parser = '^0.12.0'
 [tool.poetry.dev-dependencies]
 pytest = '^6.2'
 
+[tool.pytest.ini_options]
+addopts = '-vv'
+
 [build-system]
 requires = ['poetry>=0.12']
 build-backend = 'poetry.masonry.api'
