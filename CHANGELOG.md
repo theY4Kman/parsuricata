@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
+
+
+## [0.4.0] — 2023-08-01
 ### BREAKING
  - Comma-separated settings now parsed as `Settings` tuple (previously, a `Literal` would be used, or parsing would fail, if some settings were quote-delimited strings)  [GH#15](https://github.com/theY4Kman/parsuricata/issues/15)
 
