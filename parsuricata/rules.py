@@ -9,6 +9,7 @@ __all__ = [
     'String',
     'Literal',
     'Setting',
+    'Settings',
     'NegatedSetting',
     'Negated',
     'PortRange',
@@ -50,7 +51,7 @@ class Rule:
 @dataclass
 class Option:
     keyword: str
-    settings: 'Setting' = None
+    settings: Union['Setting', 'KeyValue'] = None
 
     def __str__(self):
         if self.settings is None:
@@ -95,6 +96,14 @@ class Setting(str):
 
     def __repr__(self):
         return repr(self.orig_value)
+
+
+class Settings(tuple):
+    def __str__(self):
+        return ', '.join(str(item) for item in self)
+
+    def __repr__(self):
+        return str(self)
 
 
 class NegatedSetting(Setting):

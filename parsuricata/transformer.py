@@ -13,6 +13,7 @@ from .rules import (
     Rule,
     RulesList,
     Setting,
+    Settings,
     String,
     Variable,
 )
@@ -73,8 +74,11 @@ class RuleTransformer(InlineTransformer):
 
         return Option(str(keyword), value)
 
-    def settings(self, value: Any):
-        return Setting(value)
+    def settings(self, *values: Any):
+        if len(values) == 1:
+            return Setting(values[0])
+
+        return Settings(Setting(value) for value in values)
 
     def negated_settings(self, value: Any):
         return NegatedSetting(value)

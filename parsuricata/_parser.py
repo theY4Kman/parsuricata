@@ -81,13 +81,13 @@ grammar = r'''
     KEYWORD: /[a-z0-9_.\-]+/i
 
     settings: "!" settings_expr   -> negated_settings
-            | settings_expr
+            | settings_expr ("," settings_expr)*
 
-    ?settings_expr: STRING  -> string
-                  | LITERAL -> literal
+    ?settings_expr: STRING              -> string
+                  | (LITERAL | KEYWORD) -> literal
 
     STRING: /"[^\r\n]+?"(?=\s*[;])/
-    LITERAL: /(?!\s+)([^;\\"]|(?!\\)\\[;\\"])+(?=;)/
+    LITERAL: /(?!\s+)([^,;\\"]|(?!\\)\\[,;\\"])+(?=;|,)/
 '''
 
 parser = Lark(
