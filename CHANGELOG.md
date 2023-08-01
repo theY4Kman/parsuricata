@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
+### Fixed
+ - Resolve minor typing incorrectness (`Option.settings` was referencing removed `KeyValue` type)
 
 
 ## [0.4.0] — 2023-08-01

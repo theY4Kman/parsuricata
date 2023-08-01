@@ -51,7 +51,7 @@ class Rule:
 @dataclass
 class Option:
     keyword: str
-    settings: Union['Setting', 'KeyValue'] = None
+    settings: Union['Setting', 'Settings'] = None
 
     def __str__(self):
         if self.settings is None:
